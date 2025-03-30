@@ -1,0 +1,107 @@
+/* Compact Footer Styles */
+.footer {
+    background-color: #2c3e50;
+    color: white;
+    padding-top: 3rem; /* Reduced from 4rem */
+    position: relative;
+  }
+  
+  .footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px; /* Reduced from 10px */
+    background: linear-gradient(135deg, #4a6fa5 0%, #3a5a80 100%);
+  }
+  
+  .footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Reduced min width */
+    gap: 2rem; /* Reduced from 3rem */
+    max-width: 1100px; /* Reduced from 1200px */
+    margin: 0 auto;
+    padding: 0 1.5rem 2rem; /* Reduced padding */
+  }
+  
+  .footer-section {
+    margin-bottom: 1.5rem; /* Reduced from 2rem */
+  }
+  
+  .footer-section h3 {
+    color: #4a6fa5;
+    margin-bottom: 1rem; /* Reduced from 1.5rem */
+    font-size: 1.5rem; /* Reduced from 1.3rem */
+    position: relative;
+    padding-bottom: 0.3rem; /* Reduced from 0.5rem */
+  }
+  
+  .footer-section h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px; /* Reduced from 50px */
+    height: 2px;
+    background-color: #4a6fa5;
+  }
+  
+  .footer-section p, 
+  .footer-section li {
+    margin-bottom: 0.8rem; /* Reduced from 1rem */
+    line-height: 1.5;
+    font-size: 0.9rem; /* Added font size reduction */
+  }
+  
+  .contact-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem; /* Reduced from 1.2rem */
+  }
+  
+  .contact-icon {
+    margin-right: 10px; /* Reduced from 12px */
+    color: #4a6fa5;
+    font-size: 1rem; /* Reduced from 1.1rem */
+  }
+  
+  .social-icons {
+    display: flex;
+    gap: 1rem; /* Reduced from 1.2rem */
+    margin-top: 1.5rem; /* Reduced from 2rem */
+  }
+  
+  .social-icon {
+    font-size: 1.6rem; /* Reduced from 1.5rem */
+    color: white;
+    transition: all 0.3s;
+  }
+  
+  .footer-bottom {
+    text-align: center;
+    padding: 1.5rem 1rem; /* Reduced from 2rem 1rem */
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.85rem; /* Reduced from 0.9rem */
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .footer {
+      padding-top: 2.5rem; /* Reduced for mobile */
+    }
+    
+    .footer-content {
+      grid-template-columns: 1fr;
+      padding: 0 1rem 1.5rem; /* Reduced padding */
+      gap: 1.5rem; /* Reduced gap */
+    }
+    
+    .footer-section {
+      margin-bottom: 1rem; /* Reduced margin */
+    }
+    
+    .social-icons {
+      margin-top: 1rem; /* Reduced margin */
+    }
+  }
