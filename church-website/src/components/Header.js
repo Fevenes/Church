@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import './Navbar.css'; // We'll create this CSS file next
+import { Container, Navbar, Nav } from 'react-bootstrap';
+import ThemeToggle from './ThemeToggle';
+import './Navbar.css';
 
 const Header = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [expanded, setExpanded] = useState(false);
 
   const navLinks = [
     { path: '/', name: 'Home' },
@@ -13,52 +14,49 @@ const Header = () => {
     { path: '/departments', name: 'Departments' },
     { path: '/locations', name: 'Locations' },
     { path: '/contact', name: 'Contact' },
-    
   ];
 
   return (
-    <nav className="navbar">
-      <div className="navbar-container">
-        <motion.div 
-          className="navbar-logo"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-        >
-          <Link to="/">Gospel Light International Church</Link>
-        </motion.div>
+    <Navbar 
+      expand="lg" 
+      fixed="top" 
+      expanded={expanded}
+      className="custom-navbar"
+      bg="light"
+      data-bs-theme="light"
+    >
+      <Container>
+        <Navbar.Brand as={Link} to="/" className="navbar-brand">
+          <span className="church-name">Gospel Light</span>
+          <span className="church-subtitle">International Church</span>
+        </Navbar.Brand>
         
-        <div className={`nav-menu ${isOpen ? 'active' : ''}`}>
-          <ul className="nav-list">
-            {navLinks.map((link, index) => (
-              <motion.li 
+        <Navbar.Toggle 
+          aria-controls="basic-navbar-nav" 
+          onClick={() => setExpanded(!expanded)}
+          className="navbar-toggler"
+        />
+        
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="ms-auto align-items-center">
+            {navLinks.map((link) => (
+              <Nav.Link 
                 key={link.path}
-                className="nav-item"
-                whileHover={{ scale: 1.1 }}
-                transition={{ delay: index * 0.1 }}
+                as={Link} 
+                to={link.path} 
+                onClick={() => setExpanded(false)}
+                className="nav-link"
               >
-                <Link 
-                  to={link.path} 
-                  className="nav-link"
-                  onClick={() => setIsOpen(false)}
-                >
-                  {link.name}
-                </Link>
-              </motion.li>
+                {link.name}
+              </Nav.Link>
             ))}
-          </ul>
-        </div>
-        
-        <div 
-          className={`hamburger ${isOpen ? 'active' : ''}`} 
-          onClick={() => setIsOpen(!isOpen)}
-        >
-          <span className="bar"></span>
-          <span className="bar"></span>
-          <span className="bar"></span>
-        </div>
-      </div>
-    </nav>
+            <div className="ms-3">
+              <ThemeToggle />
+            </div>
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
   );
 };
 

@@ -2,15 +2,12 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import AnimationWrapper from './AnimationWrapper';
 import { Link } from 'react-router-dom';
-import './EventsSection.css';
+import { Container, Row, Col, Card, Button, Badge } from 'react-bootstrap';
 
 const EventsSection = ({ isHomePage = false }) => {
-  // State to track the main image for each past event
   const [eventImages, setEventImages] = useState({});
 
-  // Function to update the main image when a thumbnail is clicked
   const handleThumbnailClick = (eventId, newImage) => {
-    // If clicking the same image that's already selected, reset to default
     if (eventImages[eventId] === newImage) {
       const newState = { ...eventImages };
       delete newState[eventId];
@@ -23,18 +20,16 @@ const EventsSection = ({ isHomePage = false }) => {
     }
   };
 
-  // Function to reset to default image
   const resetToDefaultImage = (eventId) => {
     const newState = { ...eventImages };
     delete newState[eventId];
     setEventImages(newState);
   };
 
-  // Past events with images
   const pastEvents = [
     {
       id: 1,
-      title: "When the Church is Building",
+      title: "Church Building",
       date: "April 4, 2017",
       description: "Our devotees working together to build the church",
       image: "/IMG_20170328_104208.jpg",
@@ -54,11 +49,11 @@ const EventsSection = ({ isHomePage = false }) => {
       date: "December 28, 2024",
       description: "Marriage Education for 3 days",
       image: "/_38B4903.JPG",
-      gallery: ["/_38B5258.JPG", "/_38B5214.JPG", "/_38B5250.JPG"]  
-    }
+      gallery: ["/_38B5258.JPG", "/_38B5214.JPG", "/_38B5250.JPG"] 
+
+    },
   ];
 
-  // Regular service times
   const services = [
     {
       id: 1,
@@ -71,7 +66,7 @@ const EventsSection = ({ isHomePage = false }) => {
       id: 2,
       title: "Monday Youth Programs",
       time: "Mondays at 5:30 PM",
-      description: "Youth programs",
+      description: "Teaching ,Worship and Preaching by Youth ",
       image: "/Monday.jpg"
     },
     {
@@ -80,10 +75,9 @@ const EventsSection = ({ isHomePage = false }) => {
       time: "Wednesdays Morning at 9:00AM and Afternoon 5:30 PM",
       description: "Midweek teaching and prayer gathering",
       image: "/IMG_6095.jpg"
-    }
+    },
   ];
 
-  // Upcoming events
   const upcomingEvents = [
     {
       id: 1,
@@ -95,163 +89,160 @@ const EventsSection = ({ isHomePage = false }) => {
     {
       id: 2,
       title: "Bible Studies",
-      date: "Every Day",
-      description: "Bible Studies in different devotee houses",
+      date: "Every Week",
+      description: "Bible Studies every week in different devotee houses",
       image: "/download (1).jpg",
       registerLink: "#"
-    }
+    },
   ];
 
-  // For home page - show limited items
   const displayedPastEvents = isHomePage ? pastEvents.slice(0, 2) : pastEvents;
   const displayedUpcomingEvents = isHomePage ? upcomingEvents.slice(0, 1) : upcomingEvents;
 
   return (
-    <section className={`events-page ${isHomePage ? 'home-page' : ''}`}>
+    <Container className={`py-5 ${isHomePage ? '' : 'mt-4'}`}>
       {/* Past Events Section */}
-      <div className="past-events-section">
+      <section className="mb-5">
         <AnimationWrapper>
-          <h2>Past Events Gallery</h2>
-          <p className="section-subtitle">Relive our special moments together</p>
+          <h2 className="text-center mb-4">Past Events Gallery</h2>
+          <p className="text-center text-muted mb-4">Relive our special moments together</p>
         </AnimationWrapper>
         
-        <div className="events-grid">
+        <Row className="g-4 justify-content-center">
           {displayedPastEvents.map((pastEvent, index) => (
-            <AnimationWrapper key={`past-${pastEvent.id}`} delay={index * 0.2}>
-              <motion.div 
-                className="event-card"
-                whileHover={{ y: -5 }}
-              >
-                <div className="event-image-container">
-                  <motion.img 
-                    src={eventImages[pastEvent.id] || pastEvent.image} 
-                    alt={pastEvent.title}
-                    className="event-image"
-                    onClick={() => resetToDefaultImage(pastEvent.id)}
-                    whileHover={{ scale: 1.01 }}
-                    whileTap={{ scale: 0.99 }}
-                  />
-                  <div className="date-badge">{pastEvent.date}</div>
-                </div>
-                <div className="event-content">
-                  <h3>{pastEvent.title}</h3>
-                  <p className="event-description">{pastEvent.description}</p>
-                  {!isHomePage && (
-                    <>
-                      <div className="event-gallery">
-                        {pastEvent.gallery.map((img, i) => (
-                          <motion.img 
-                            key={i} 
-                            src={img} 
-                            alt={`${pastEvent.title} gallery ${i+1}`}
-                            className={`gallery-thumbnail ${
-                              (eventImages[pastEvent.id] || pastEvent.image) === img ? 'active' : ''
-                            }`}
-                            onClick={() => handleThumbnailClick(pastEvent.id, img)}
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                          />
-                        ))}
-                      </div>
-                      {eventImages[pastEvent.id] && (
-                        <motion.button
-                          className="reset-button"
-                          onClick={() => resetToDefaultImage(pastEvent.id)}
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
-                        >
-                          Show Default Image
-                        </motion.button>
-                      )}
-                    </>
-                  )}
-                </div>
-              </motion.div>
-            </AnimationWrapper>
+            <Col key={`past-${pastEvent.id}`} lg={isHomePage ? 6 : 4} md={6}>
+              <AnimationWrapper delay={index * 0.2}>
+                <Card className="h-100 shadow-sm border-0">
+                  <div className="position-relative overflow-hidden" style={{ height: '200px' }}>
+                    <Card.Img 
+                      variant="top"
+                      src={eventImages[pastEvent.id] || pastEvent.image}
+                      className="h-100 w-100 object-fit-cover"
+                      onClick={() => resetToDefaultImage(pastEvent.id)}
+                    />
+                    <Badge pill bg="primary" className="position-absolute bottom-0 start-0 m-2">
+                      {pastEvent.date}
+                    </Badge>
+                  </div>
+                  <Card.Body className="d-flex flex-column">
+                    <Card.Title>{pastEvent.title}</Card.Title>
+                    <Card.Text className="text-muted">{pastEvent.description}</Card.Text>
+                    {!isHomePage && (
+                      <>
+                        <div className="d-flex gap-2 mt-auto mb-3">
+                          {pastEvent.gallery.map((img, i) => (
+                            <motion.img
+                              key={i}
+                              src={img}
+                              alt={`${pastEvent.title} gallery ${i+1}`}
+                              className={`img-thumbnail cursor-pointer ${(eventImages[pastEvent.id] || pastEvent.image) === img ? 'border-primary' : ''}`}
+                              style={{ width: '60px', height: '60px', objectFit: 'cover' }}
+                              onClick={() => handleThumbnailClick(pastEvent.id, img)}
+                              whileHover={{ scale: 1.05 }}
+                              whileTap={{ scale: 0.95 }}
+                            />
+                          ))}
+                        </div>
+                        {eventImages[pastEvent.id] && (
+                          <Button 
+                            variant="outline-primary"
+                            size="sm"
+                            onClick={() => resetToDefaultImage(pastEvent.id)}
+                            className="mt-auto align-self-start"
+                          >
+                            Show Default Image
+                          </Button>
+                        )}
+                      </>
+                    )}
+                  </Card.Body>
+                </Card>
+              </AnimationWrapper>
+            </Col>
           ))}
-        </div>
+        </Row>
 
         {isHomePage && (
-          <div className="view-all-container">
-            <Link to="/events" className="view-all-button">
+          <div className="text-center mt-4">
+            <Button as={Link} to="/events" variant="primary" className="px-4">
               View All Past Events
-            </Link>
+            </Button>
           </div>
         )}
-      </div>
+      </section>
 
       {/* Regular Services Section */}
-      <div className="services-section">
+      <section className="py-4 bg-light rounded mb-5">
         <AnimationWrapper>
-          <h2>Our Regular Services</h2>
-          <p className="section-subtitle">Join us for weekly worship</p>
+          <h2 className="text-center mb-4">Our Regular Services</h2>
+          <p className="text-center text-muted mb-4">Join us for weekly worship</p>
         </AnimationWrapper>
         
-        <div className={`services-grid ${!isHomePage ? 'side-by-side' : ''}`}>
+        <Row className="g-4">
           {services.map((service, index) => (
-            <AnimationWrapper key={`service-${service.id}`} delay={index * 0.2}>
-              <motion.div 
-                className="service-card"
-                whileHover={{ scale: 1.02 }}
-              >
-                <div className="service-image-container">
-                  <img 
-                    src={service.image} 
-                    alt={service.title}
-                    className="service-image"
-                  />
-                </div>
-                <div className="service-content">
-                  <h3>{service.title}</h3>
-                  <p className="service-time">{service.time}</p>
-                  <p className="service-description">{service.description}</p>
-                </div>
-              </motion.div>
-            </AnimationWrapper>
+            <Col key={`service-${service.id}`} lg={isHomePage ? 4 : 4} md={6}>
+              <AnimationWrapper delay={index * 0.2}>
+                <Card className="h-100 shadow-sm border-0">
+                  <div style={{ height: '180px' }}>
+                    <Card.Img 
+                      variant="top"
+                      src={service.image}
+                      className="h-100 w-100 object-fit-cover"
+                    />
+                  </div>
+                  <Card.Body>
+                    <Card.Title>{service.title}</Card.Title>
+                    <Card.Subtitle className="mb-2 text-muted">{service.time}</Card.Subtitle>
+                    <Card.Text>{service.description}</Card.Text>
+                  </Card.Body>
+                </Card>
+              </AnimationWrapper>
+            </Col>
           ))}
-        </div>
-      </div>
+        </Row>
+      </section>
 
       {/* Upcoming Events Section */}
-      <div className="upcoming-events-section">
+      <section className="mb-4">
         <AnimationWrapper>
-          <h2>Upcoming Events</h2>
-          <p className="section-subtitle">Mark your calendars</p>
+          <h2 className="text-center mb-4">Upcoming Events</h2>
+          <p className="text-center text-muted mb-4">Mark your calendars</p>
         </AnimationWrapper>
         
-        <div className="events-grid">
+        <Row className="g-4 justify-content-center">
           {displayedUpcomingEvents.map((upcomingEvent, index) => (
-            <AnimationWrapper key={`upcoming-${upcomingEvent.id}`} delay={index * 0.2}>
-              <motion.div 
-                className="event-card"
-                whileHover={{ y: -5 }}
-              >
-                <div className="event-image-container">
-                  <img 
-                    src={upcomingEvent.image} 
-                    alt={upcomingEvent.title}
-                    className="event-image"
-                  />
-                  <div className="date-badge">{upcomingEvent.date}</div>
-                </div>
-                <div className="event-content">
-                  <h3>{upcomingEvent.title}</h3>
-                  <p className="event-description">{upcomingEvent.description}</p>
-                </div>
-              </motion.div>
-            </AnimationWrapper>
+            <Col key={`upcoming-${upcomingEvent.id}`} lg={isHomePage ? 6 : 4} md={6}>
+              <AnimationWrapper delay={index * 0.2}>
+                <Card className="h-100 shadow-sm border-0">
+                  <div className="position-relative overflow-hidden" style={{ height: '200px' }}>
+                    <Card.Img 
+                      variant="top"
+                      src={upcomingEvent.image}
+                      className="h-100 w-100 object-fit-cover"
+                    />
+                    <Badge pill bg="primary" className="position-absolute bottom-0 start-0 m-2">
+                      {upcomingEvent.date}
+                    </Badge>
+                  </div>
+                  <Card.Body>
+                    <Card.Title>{upcomingEvent.title}</Card.Title>
+                    <Card.Text className="text-muted">{upcomingEvent.description}</Card.Text>
+                  </Card.Body>
+                </Card>
+              </AnimationWrapper>
+            </Col>
           ))}
-        </div>
+        </Row>
 
         {isHomePage && (
-          <div className="view-all-container">
-            <Link to="/events" className="view-all-button">
+          <div className="text-center mt-4">
+            <Button as={Link} to="/events" variant="primary" className="px-4">
               View All Upcoming Events
-            </Link>
+            </Button>
           </div>
         )}
-      </div>
-    </section>
+      </section>
+    </Container>
   );
 };
 
