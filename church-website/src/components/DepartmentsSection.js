@@ -1,57 +1,92 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Container, Row, Col, Card } from 'react-bootstrap';
+import { Container, Row, Col, Card, Modal, Button } from 'react-bootstrap';
 
 const DepartmentsSection = () => {
+  const [selectedDept, setSelectedDept] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+
+  const handleCardClick = (dept) => {
+    setSelectedDept(dept);
+    setShowModal(true);
+  };
+
+  const handleClose = () => setShowModal(false);
+
   const departments = [
     {
       id: 1,
       title: "Choir 1",
       description: "Our main worship team for Sunday morning services",
-      image: "/images/choir1.jpg",
-      contact: "choir1@church.org"
+      images: [
+        "choir1.jpg",
+      ],
+      contact: "choir1@church.org",
+      details: "Choir 1 leads Sunday morning worship, wednesday night worships and also monday youth worship nights and holds practice every Saturday. Focused on praise, worship, and unity.",
+      members: 18
     },
     {
       id: 2,
       title: "Choir 2",
       description: "Evening service worship team and special events",
-      image: "/IMG_6078.jpg",
-      contact: "choir2@church.org"
+      images: [
+        "/IMG_6078.jpg",
+      ],
+      contact: "choir2@church.org",
+      details: "Choir 2 supports evening services and handles worship during special church programs ",
+      members: 14
     },
     {
       id: 3,
       title: "Children's Teachers",
       description: "Dedicated team nurturing young believers (ages 3-14)",
-      image: "/Kids.jpg",
-      contact: "children@church.org"
+      images: [
+        "Kids.jpg",
+      ],
+      contact: "children@church.org",
+      details: "Teachers provide spiritual foundation and Bible lessons for children during Sunday school and special events.",
+      members: 12
     },
     {
       id: 4,
       title: "Deacons Board",
       description: "Spiritual leaders assisting with church operations and pastoral care",
-      image: "/images/deacons.jpg",
-      contact: "deacons@church.org"
+      images: [
+        "photo_2025-07-12_13-23-37.jpg",
+        "photo_2025-07-12_13-23-44.jpg",
+      ],
+      contact: "deacons@church.org",
+      details: "The Deacons Board helps with church discipline, visitation, spiritual guidance, and ministry support.",
+      members: 10
     },
     {
       id: 5,
       title: "Wedding Ministry",
       description: "Pre-marital counseling and wedding ceremony coordination",
-      image: "/download (2).jpg",
-      contact: "weddings@church.org"
+      images: [
+        "download (2).jpg",
+      ],
+      contact: "weddings@church.org",
+      details: "This team prepares couples for marriage spiritually and organizes wedding ceremonies with church standards.",
+      members: 6
     },
     {
-      id: 6,
+      id: "evanglism",
       title: "Evangelism Team",
       description: "Spreading the Gospel through outreach and missions",
-      image: "/ev.jpg",
-      contact: "evangelism@church.org"
+      images: [
+        "ev.jpg",
+      ],
+      contact: "evangelism@church.org",
+      details: "Responsible for street preaching, tract distribution, missions, and community outreach.",
+      members: 20
     }
   ];
 
   return (
     <Container fluid className="py-5 bg-light">
       <Container className="text-center mb-5">
-        <motion.h2 
+        <motion.h2
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -59,7 +94,7 @@ const DepartmentsSection = () => {
         >
           Ministry Departments
         </motion.h2>
-        
+
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -81,11 +116,15 @@ const DepartmentsSection = () => {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 whileHover={{ y: -5 }}
               >
-                <Card className="h-100 shadow-sm border-0 overflow-hidden">
+                <Card
+                  className="h-100 shadow-sm border-0 overflow-hidden"
+                  onClick={() => handleCardClick(dept)}
+                  style={{ cursor: 'pointer' }}
+                >
                   <div style={{ height: '200px', overflow: 'hidden' }}>
-                    <Card.Img 
+                    <Card.Img
                       variant="top"
-                      src={dept.image}
+                      src={dept.images[0]}
                       alt={dept.title}
                       className="h-100 w-100 object-fit-cover"
                       loading="lazy"
@@ -96,22 +135,7 @@ const DepartmentsSection = () => {
                     <Card.Text className="text-muted flex-grow-1">
                       {dept.description}
                     </Card.Text>
-                    <a 
-                      href={`mailto:${dept.contact}`} 
-                      className="d-inline-flex align-items-center text-decoration-none text-primary fw-medium"
-                    >
-                      Contact Team
-                      <svg 
-                        width="16" 
-                        height="16" 
-                        viewBox="0 0 24 24" 
-                        fill="none" 
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="ms-2"
-                      >
-                        <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                      </svg>
-                    </a>
+                    <span className="text-primary fw-medium">More</span>
                   </Card.Body>
                 </Card>
               </motion.div>
@@ -119,6 +143,54 @@ const DepartmentsSection = () => {
           ))}
         </Row>
       </Container>
+
+      {/* Modal */}
+      <Modal show={showModal} onHide={handleClose} centered size="lg">
+        <Modal.Header closeButton>
+          <Modal.Title>{selectedDept?.title}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="text-center">
+          {/* Image gallery */}
+          <div
+            style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              justifyContent: 'center',
+              gap: '10px',
+              marginBottom: '15px',
+            }}
+          >
+            {selectedDept?.images?.map((img, idx) => (
+              <img
+                key={idx}
+                src={img}
+                alt={`${selectedDept.title} image ${idx + 1}`}
+                style={{
+                  maxWidth: '200px',
+                  width: '100%',
+                  height: 'auto',
+                  borderRadius: '8px',
+                  boxShadow: '0 2px 6px rgba(0,0,0,0.15)',
+                }}
+                loading="lazy"
+              />
+            ))}
+          </div>
+
+          <p><strong>Description:</strong> {selectedDept?.description}</p>
+          <p><strong>Details:</strong> {selectedDept?.details}</p>
+          <p><strong>Members:</strong> {selectedDept?.members}</p>
+          <p>
+            <strong>Contact:</strong>{' '}
+            <a href={`mailto:${selectedDept?.contact}`}>{selectedDept?.contact}</a>
+          </p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </Container>
   );
 };

@@ -1,0 +1,6 @@
+/* In either component's CSS */
+section {
+ margin-bottom: 2rem; /* or adjust smaller */
+padding-bottom: 0;   /* remove if unnecessary */
+
+}

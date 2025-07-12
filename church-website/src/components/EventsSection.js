@@ -96,18 +96,19 @@ const EventsSection = ({ isHomePage = false }) => {
     },
   ];
 
-  const displayedPastEvents = isHomePage ? pastEvents.slice(0, 2) : pastEvents;
+  const displayedPastEvents = isHomePage ? [] : pastEvents;
   const displayedUpcomingEvents = isHomePage ? upcomingEvents.slice(0, 1) : upcomingEvents;
 
   return (
     <Container className={`py-5 ${isHomePage ? '' : 'mt-4'}`}>
       {/* Past Events Section */}
       <section className="mb-5">
-        <AnimationWrapper>
-          <h2 className="text-center mb-4">Past Events Gallery</h2>
-          <p className="text-center text-muted mb-4">Relive our special moments together</p>
-        </AnimationWrapper>
-        
+        {!isHomePage && (
+          <AnimationWrapper>
+            <h2 className="text-center mb-4">Past Events Gallery</h2>
+            <p className="text-center text-muted mb-4">Relive our special moments together</p>
+          </AnimationWrapper>
+        )}        
         <Row className="g-4 justify-content-center">
           {displayedPastEvents.map((pastEvent, index) => (
             <Col key={`past-${pastEvent.id}`} lg={isHomePage ? 6 : 4} md={6}>
@@ -162,14 +163,8 @@ const EventsSection = ({ isHomePage = false }) => {
           ))}
         </Row>
 
-        {isHomePage && (
-          <div className="text-center mt-4">
-            <Button as={Link} to="/events" variant="primary" className="px-4">
-              View All Past Events
-            </Button>
-          </div>
-        )}
-      </section>
+        
+      </section>   
 
       {/* Regular Services Section */}
       <section className="py-4 bg-light rounded mb-5">
