@@ -23,19 +23,21 @@ const DepartmentsSection = () => {
       ],
       details: "Choir 1 leads Sunday morning worship, wednesday night worships and also monday youth worship nights and holds practice every Saturday. Focused on praise, worship, and unity.",
       members: 18,
-      date : "This choir start when the members are Children and it start in 2017 G.C"
+      date : "It start in 2017 G.C",
+      contact : "There leaders are Betselot and Bereket"
 
     },
     {
       id: 2,
       title: "Choir 2",
-      description: "Evening service worship team and special events",
+      description: "They are our second choir team",
       images: [
         "/IMG_6078.jpg",
       ],
-      contact: "choir2@church.org",
-      details: "Choir 2 supports evening services and handles worship during special church programs ",
-      members: 14
+      details: "Choir 1 leads Sunday morning worship, wednesday night worships and holds practice every Thursday. Focused on praise, worship, and unity",
+      members: 14,
+      date: "It start in 2016 E.C",
+      contact: "Our Pastor is the leader of this choir and his name is Pastor Beneberu Ashagere",
     },
     {
       id: 3,
@@ -44,9 +46,9 @@ const DepartmentsSection = () => {
       images: [
         "Kids.jpg",
       ],
-      contact: "children@church.org",
       details: "Teachers provide spiritual foundation and Bible lessons for children during Sunday school and special events.",
-      members: 12
+      members: 12,
+      contact: "Abeba Ayalew",
     },
     {
       id: 4,

@@ -1,31 +1,44 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import AnimationWrapper from './AnimationWrapper';
-import { Container, Row, Col, Form, Button, Card} from 'react-bootstrap';
+import { Container, Row, Col, Form, Button, Card } from 'react-bootstrap';
 
 const ContactSection = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
-  });
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [submitting, setSubmitting] = useState(false);
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    alert('Thank you for your message! We will get back to you soon.');
-    setFormData({
-      name: '',
-      email: '',
-      message: ''
-    });
+    setSubmitting(true);
+
+    try {
+      const response = await fetch(
+        'https://script.google.com/macros/s/AKfycbyOsGcVe0z_XeprE_V1OUw1sPCqmRbC2SSkVlxgeGbnn5GoYTofN97ubecA_6HEpAAB/exec', // replace with your Google Apps Script URL
+        {
+          method: 'POST',
+          body: JSON.stringify(formData),
+          headers: { 'Content-Type': 'application/json' },
+        }
+      );
+
+      const result = await response.json().catch(() => null); // safely handle non-JSON
+
+      if (result?.status === 'success' || !result) {
+        alert('Thank you! We received your message.');
+        setFormData({ name: '', email: '', message: '' });
+      } else {
+        alert('Failed to submit. Please try again later.');
+      }
+    } catch (err) {
+      console.error('Submission error:', err);
+      alert('Error submitting form. Please try again later.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -39,6 +52,7 @@ const ContactSection = () => {
       </Row>
 
       <Row className="g-4 justify-content-center">
+        {/* Contact Info */}
         <Col lg={5}>
           <AnimationWrapper delay={0.2}>
             <motion.div whileHover={{ y: -5 }}>
@@ -74,13 +88,10 @@ const ContactSection = () => {
           </AnimationWrapper>
         </Col>
 
+        {/* Contact Form */}
         <Col lg={7}>
           <AnimationWrapper delay={0.4}>
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.4 }}
-            >
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }}>
               <Card className="shadow-sm border-0 p-4">
                 <Card.Body>
                   <Form onSubmit={handleSubmit}>
@@ -93,6 +104,7 @@ const ContactSection = () => {
                         onChange={handleChange}
                         required
                         size="lg"
+                        disabled={submitting}
                       />
                     </Form.Group>
 
@@ -105,6 +117,7 @@ const ContactSection = () => {
                         onChange={handleChange}
                         required
                         size="lg"
+                        disabled={submitting}
                       />
                     </Form.Group>
 
@@ -118,20 +131,16 @@ const ContactSection = () => {
                         onChange={handleChange}
                         required
                         size="lg"
+                        disabled={submitting}
                       />
                     </Form.Group>
 
-                    <motion.div
-                      whileHover={{ scale: 1.03 }}
-                      whileTap={{ scale: 0.97 }}
-                    >
-                      <Button 
-                        variant="primary" 
-                        type="submit" 
-                        size="lg"
-                        className="w-100 py-3"
-                      >
-                        Send Message
+                    <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
+                      <Button  variant="primary" 
+  type="submit" 
+  size="lg" 
+  disabled={submitting}>
+                        {submitting ? 'Sending...' : 'Send Message'}
                       </Button>
                     </motion.div>
                   </Form>
