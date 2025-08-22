@@ -97,7 +97,7 @@ const EventsSection = ({ isHomePage = false }) => {
   ];
 
   const displayedPastEvents = isHomePage ? [] : pastEvents;
-  const displayedUpcomingEvents = isHomePage ? upcomingEvents.slice(0, 1) : upcomingEvents;
+  
 
   return (
     <Container className={`py-5 ${isHomePage ? '' : 'mt-4'}`}>
@@ -197,46 +197,51 @@ const EventsSection = ({ isHomePage = false }) => {
         </Row>
       </section>
 
-      {/* Upcoming Events Section */}
-      <section className="mb-4">
-        <AnimationWrapper>
-          <h2 className="text-center mb-4">Upcoming Events</h2>
-          <p className="text-center text-muted mb-4">Mark your calendars</p>
-        </AnimationWrapper>
-        
-        <Row className="g-4 justify-content-center">
-          {displayedUpcomingEvents.map((upcomingEvent, index) => (
-            <Col key={`upcoming-${upcomingEvent.id}`} lg={isHomePage ? 6 : 4} md={6}>
-              <AnimationWrapper delay={index * 0.2}>
-                <Card className="h-100 shadow-sm border-0">
-                  <div className="position-relative overflow-hidden" style={{ height: '200px' }}>
-                    <Card.Img 
-                      variant="top"
-                      src={upcomingEvent.image}
-                      className="h-100 w-100 object-fit-cover"
-                    />
-                    <Badge pill bg="primary" className="position-absolute bottom-0 start-0 m-2">
-                      {upcomingEvent.date}
-                    </Badge>
-                  </div>
-                  <Card.Body>
-                    <Card.Title>{upcomingEvent.title}</Card.Title>
-                    <Card.Text className="text-muted">{upcomingEvent.description}</Card.Text>
-                  </Card.Body>
-                </Card>
-              </AnimationWrapper>
-            </Col>
-          ))}
-        </Row>
+   {/* Upcoming Events Section */}
+{!isHomePage && (() => {
+  const displayedUpcomingEvents = upcomingEvents; // only needed here
+  return (
+    <section className="mb-4">
+      <AnimationWrapper>
+        <h2 className="text-center mb-4">Upcoming Events</h2>
+        <p className="text-center text-muted mb-4">Mark your calendars</p>
+      </AnimationWrapper>
+      
+      <Row className="g-4 justify-content-center">
+        {displayedUpcomingEvents.map((upcomingEvent, index) => (
+          <Col key={`upcoming-${upcomingEvent.id}`} lg={4} md={6}>
+            <AnimationWrapper delay={index * 0.2}>
+              <Card className="h-100 shadow-sm border-0">
+                <div className="position-relative overflow-hidden" style={{ height: '200px' }}>
+                  <Card.Img 
+                    variant="top"
+                    src={upcomingEvent.image}
+                    className="h-100 w-100 object-fit-cover"
+                  />
+                  <Badge pill bg="primary" className="position-absolute bottom-0 start-0 m-2">
+                    {upcomingEvent.date}
+                  </Badge>
+                </div>
+                <Card.Body>
+                  <Card.Title>{upcomingEvent.title}</Card.Title>
+                  <Card.Text className="text-muted">{upcomingEvent.description}</Card.Text>
+                </Card.Body>
+              </Card>
+            </AnimationWrapper>
+          </Col>
+        ))}
+      </Row>
 
-        {isHomePage && (
-          <div className="text-center mt-4">
-            <Button as={Link} to="/events" variant="primary" className="px-4">
-              View All Upcoming Events
-            </Button>
-          </div>
-        )}
-      </section>
+      <div className="text-center mt-4">
+        <Button as={Link} to="/events" variant="primary" className="px-4">
+          View All Upcoming Events
+        </Button>
+      </div>
+    </section>
+  );
+})()}
+
+
     </Container>
   );
 };

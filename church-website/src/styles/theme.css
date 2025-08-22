@@ -1,16 +1,101 @@
-/* Light mode is default */
+/* styles/theme.css */
 
+/* Light mode (default) */
 body {
-  background-color: white;
-  color: black;
+  background-color: #ffffff;
+  color: #000000;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Dark mode */
-
 body.dark-mode {
   background-color: #121212;
-  color: #e0e0e0;
+  color: #f8f9fa; /* readable light text */
 }
 
+/* Override Bootstrap muted text */
+body.dark-mode .text-muted {
+  color: #cccccc !important;
+}
 
+/* Headings & paragraph readability */
+body.dark-mode h1,
+body.dark-mode p {
+  color: #f8f9fa !important;
+}
+
+/* Card styling in dark mode */
+body.dark-mode .card {
+  background-color: #1e1e1e;
+  color: #f8f9fa;
+}
+
+/* Buttons */
+body.dark-mode .btn-outline-primary {
+  border-color: #ffffff;
+  color: #ffffff;
+}
+body.dark-mode .btn-outline-primary:hover {
+  background-color: #ffffff;
+  color: #121212;
+}
+
+body.dark-mode .btn-primary {
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+}
+body.dark-mode .btn-primary:hover {
+  background-color: #0b5ed7;
+  border-color: #0a58ca;
+}
+/* Fix for Get Involved Section (Cards) */
+body.dark-mode .card {
+  background-color: #1e1e1e;
+  color: #f8f9fa;
+  border: 1px solid #2c2c2c; /* subtle border so cards don't blend */
+}
+
+/* Fix for buttons */
+body.dark-mode .btn-primary {
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+  color: #ffffff; /* make sure button text is visible */
+}
+
+body.dark-mode .btn-primary:hover {
+  background-color: #0b5ed7;
+  border-color: #0a58ca;
+  color: #ffffff;
+}
+
+/* If you have custom .cta-button */
+body.dark-mode .cta-button {
+  background-color: #0d6efd;
+  color: #ffffff;
+  border: none;
+}
+/* Default (light mode) */
+.get-involved {
+  background-color: #f8f9fa; /* light gray background */
+  color: #000; /* readable dark text */
+}
+
+/* Dark mode override */
+body.dark-mode .get-involved {
+  background-color: #121212; /* dark background */
+  color: #f8f9fa; /* light text */
+}
+
+/* Make sure card text/icons stay visible */
+body.dark-mode .get-involved .card {
+  background-color: #1e1e1e;
+  color: #f8f9fa;
+}
+
+body.dark-mode .get-involved .text-primary {
+  color: #0d6efd !important; /* keep icons blue */
+}
+/* Force readable card text in dark mode */
+body.dark-mode .card-text {
+  color: #e0e0e0 !important;
+}

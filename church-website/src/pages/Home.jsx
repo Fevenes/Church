@@ -3,9 +3,10 @@ import { motion } from 'framer-motion';
 import HomeSection from '../components/HomeSection';
 import AboutSection from '../components/Homeabout';
 import GetInvolvedSection from '../components/GetInvolvedSection';
-import EventsSection from '../components/EventsSection';
 import './Home.css';
 import HomeAbout from '../components/Homeabout';
+import EventsSection from '../components/EventsSection';
+import Blog from './Blog.jsx';
 
 
 const Home = () => {
@@ -20,6 +21,8 @@ const Home = () => {
       <HomeAbout />
       <GetInvolvedSection />
       <EventsSection isHomePage={true} />
+      <Blog />
+
     </motion.div>
   );
 };

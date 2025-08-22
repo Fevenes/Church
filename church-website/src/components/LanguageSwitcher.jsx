@@ -1,10 +1,17 @@
 // components/LanguageSwitcher.jsx
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { useLocation } from 'react-router-dom';
 
 const LanguageSwitcher = () => {
   const { i18n } = useTranslation();
   const currentLang = i18n.language;
+  const location = useLocation();
+
+  // Show only on /about page
+  if (!location.pathname.includes('/about')) {
+    return null;
+  }
 
   return (
     <div className="d-flex justify-content-end justify-content-center justify-content-md-end p-3">

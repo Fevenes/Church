@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Children, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Container, Row, Col, Card, Modal, Button } from 'react-bootstrap';
 
@@ -17,13 +17,14 @@ const DepartmentsSection = () => {
     {
       id: 1,
       title: "Choir 1",
-      description: "Our main worship team for Sunday morning services",
+      description: "Our main choir team for services",
       images: [
         "choir1.jpg",
       ],
-      contact: "choir1@church.org",
       details: "Choir 1 leads Sunday morning worship, wednesday night worships and also monday youth worship nights and holds practice every Saturday. Focused on praise, worship, and unity.",
-      members: 18
+      members: 18,
+      date : "This choir start when the members are Children and it start in 2017 G.C"
+
     },
     {
       id: 2,

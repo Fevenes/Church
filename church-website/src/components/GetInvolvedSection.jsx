@@ -28,7 +28,7 @@ const GetInvolvedSection = () => {
 
   return (
     <>
-      <section className="get-involved py-5 text-center bg-light">
+      <section className="get-involved py-5 text-center">
         <Container>
           <h1 className="mb-3">
             GET <b>INVOLVED</b>
@@ -71,10 +71,10 @@ const GetInvolvedSection = () => {
               <strong>Account Number:</strong> 1000123456789
             </p>
             <hr />
-            <h6>Awash Bank</h6>
+            <h6>Berhan International Bank</h6>
             <p>
               <strong>Account Name:</strong> Gospel Light Church<br />
-              <strong>Account Number:</strong> 1234567890123
+              <strong>Account Number:</strong> 2500080024630
             </p>
             <hr />
             <h6>Bank of Abyssinia (BoA)</h6>

@@ -33,3 +33,14 @@
       margin-top: 2rem;
     }
   }
+/* Default (light mode) */
+.hero-section {
+  background: linear-gradient(to right, #f8f9fa, #e9ecef); /* or your light background */
+  color: black;
+}
+
+/* Dark mode override */
+body.dark-mode .hero-section {
+  background: linear-gradient(to right, #1e1e1e, #121212); /* darker gradient */
+  color: #f8f9fa; /* make sure text is readable */
+}
