@@ -1,13 +1,13 @@
+// pages/Home.jsx — Updated with LiveStreamSection added
 import React from 'react';
 import { motion } from 'framer-motion';
 import HomeSection from '../components/HomeSection';
-import AboutSection from '../components/Homeabout';
-import GetInvolvedSection from '../components/GetInvolvedSection';
-import './Home.css';
 import HomeAbout from '../components/Homeabout';
+import GetInvolvedSection from '../components/GetInvolvedSection';
 import EventsSection from '../components/EventsSection';
-import Blog from './Blog.jsx';
+import LiveStreamSection from '../components/LiveStreamSection'; // ✅ NEW
 
+import './Home.css';
 
 const Home = () => {
   return (
@@ -20,9 +20,8 @@ const Home = () => {
       <HomeSection />
       <HomeAbout />
       <GetInvolvedSection />
+      <LiveStreamSection />      {/* ✅ NEW — Live stream section */}
       <EventsSection isHomePage={true} />
-      <Blog />
-
     </motion.div>
   );
 };

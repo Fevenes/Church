@@ -12,7 +12,6 @@ const Events = () => {
       className="events-page"
     >
       <EventsSection />
-      {/* Additional events content can be added here */}
     </motion.div>
   );
 };

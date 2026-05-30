@@ -1,103 +1,193 @@
-import React, { useState } from "react";
-import { Container, Row, Col, Card, Modal, Button } from "react-bootstrap";
+import React from "react";
+import { Container, Row, Col, Card } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 import {
-  FaHeart,
-  FaUserFriends,
-  FaBullhorn,
-  FaPray,
-  FaHandshake,
+FaHeart,
+FaBullhorn,
+FaPray,
+FaHandshake,
 } from "react-icons/fa";
 
 const involvementOptions = [
-  { title: "Giving", icon: <FaHeart />, link: "" },
-  { title: "Outreach", icon: <FaBullhorn />, link: "#evanglism" },
-  { title: "Prayer", icon: <FaPray />, link: "#" },
-  { title: "Groups", icon: <FaHandshake />, link: "https://t.me/+jIAuAXMKUT00NjQ0" },
+{
+title: "Giving",
+icon: <FaHeart />,
+description: "Support the ministry",
+action: "internal",
+link: "/donate",
+color: "#dc3545",
+},
+{
+title: "Outreach",
+icon: <FaBullhorn />,
+description: "Serve the community",
+action: "internal",
+link: "/departments",
+color: "#fd7e14",
+},
+{
+title: "Prayer",
+icon: <FaPray />,
+description: "Share your needs",
+action: "internal",
+link: "https://t.me/+jIAuAXMKUT00NjQ0",
+color: "#198754",
+},
+{
+title: "Groups",
+icon: <FaHandshake />,
+description: "Join a small group",
+action: "external",
+link: "https://t.me/+jIAuAXMKUT00NjQ0",
+color: "#0d6efd",
+},
 ];
 
 const GetInvolvedSection = () => {
-  const [showModal, setShowModal] = useState(false);
+const navigate = useNavigate();
 
-  const handleCardClick = (title, link) => {
-    if (title === "Giving") {
-      setShowModal(true);
-    } else if (link) {
-      window.open(link, "_blank");
-    }
-  };
+const handleCardClick = (action, link) => {
+if (action === "internal") {
+navigate(link);
+} else {
+window.open(link, "_blank");
+}
+};
 
-  return (
-    <>
-      <section className="get-involved py-5 text-center">
-        <Container>
-          <h1 className="mb-3">
-            GET <b>INVOLVED</b>
-          </h1>
-          <p className="lead mb-5">See what God can do through you.</p>
-          <Row className="g-4 justify-content-center">
-            {involvementOptions.map((item, index) => (
-              <Col xs={6} sm={4} md={2} key={index}>
-                <Card
-                  className="h-100 shadow-sm border-0 hover-effect"
-                  onClick={() => handleCardClick(item.title, item.link)}
-                  style={{ cursor: "pointer" }}
-                >
-                  <Card.Body>
-                    <div className="mb-3 fs-2 text-primary">{item.icon}</div>
-                    <h6 className="mb-0">{item.title}</h6>
-                  </Card.Body>
-                </Card>
-              </Col>
-            ))}
-          </Row>
-        </Container>
-      </section>
+return (
+<section
+style={{
+background: "#f8f9fa",
+padding: "80px 0",
+}}
+> <Container>
+<motion.div
+initial={{ opacity: 0, y: 24 }}
+whileInView={{ opacity: 1, y: 0 }}
+viewport={{ once: true }}
+transition={{ duration: 0.5 }}
+style={{
+textAlign: "center",
+maxWidth: "700px",
+margin: "0 auto 50px",
+}}
+>
+<p
+style={{
+color: "#0d6efd",
+fontWeight: 800,
+letterSpacing: "3px",
+textTransform: "uppercase",
+fontSize: "13px",
+marginBottom: "10px",
+}}
+>
+Gospel Light International Church </p>
 
-      {/* Modal for Giving */}
-      <Modal
-        show={showModal}
-        onHide={() => setShowModal(false)}
-        centered
-        aria-labelledby="giving-modal"
+```
+      <h2
+        style={{
+          fontSize: "clamp(2rem,4vw,3rem)",
+          fontWeight: 900,
+          color: "#111827",
+          marginBottom: "12px",
+        }}
       >
-        <Modal.Header closeButton>
-          <Modal.Title id="giving-modal">Church Bank Accounts</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <div className="text-start">
-            <h6>Commercial Bank of Ethiopia (CBE)</h6>
-            <p>
-              <strong>Account Name:</strong> Gospel Light International Church<br />
-              <strong>Account Number:</strong> 1000123456789
-            </p>
-            <hr />
-            <h6>Berhan International Bank</h6>
-            <p>
-              <strong>Account Name:</strong> Gospel Light Church<br />
-              <strong>Account Number:</strong> 2500080024630
-            </p>
-            <hr />
-            <h6>Bank of Abyssinia (BoA)</h6>
-            <p>
-              <strong>Account Name:</strong> Gospel Light Int’l Church<br />
-              <strong>Account Number:</strong> 9876543210001
-            </p>
-            <hr />
-            <h6>Cooperative Bank of Oromia</h6>
-            <p>
-              <strong>Account Name:</strong> Gospel Light Church<br />
-              <strong>Account Number:</strong> 11112222333344
-            </p>
-          </div>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowModal(false)}>
-            Close
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    </>
-  );
+        Get Involved
+      </h2>
+
+      <p
+        style={{
+          color: "#6b7280",
+          fontSize: "18px",
+        }}
+      >
+        Discover ways to serve, give, pray, and grow together as a church family.
+      </p>
+    </motion.div>
+
+    <Row className="g-4 justify-content-center">
+      {involvementOptions.map((item, index) => (
+        <Col xs={12} sm={6} md={3} key={index}>
+          <motion.div
+            whileHover={{ y: -10 }}
+            whileTap={{ scale: 0.98 }}
+            transition={{ duration: 0.25 }}
+          >
+            <Card
+              onClick={() =>
+                handleCardClick(item.action, item.link)
+              }
+              style={{
+                cursor: "pointer",
+                border: "none",
+                borderRadius: "24px",
+                overflow: "hidden",
+                boxShadow:
+                  "0 14px 35px rgba(0,0,0,0.1)",
+                height: "100%",
+              }}
+            >
+              <Card.Body
+                style={{
+                  textAlign: "center",
+                  padding: "35px 25px",
+                }}
+              >
+                <div
+                  style={{
+                    width: "72px",
+                    height: "72px",
+                    borderRadius: "50%",
+                    background: `${item.color}15`,
+                    color: item.color,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontSize: "30px",
+                    margin: "0 auto 20px",
+                  }}
+                >
+                  {item.icon}
+                </div>
+
+                <h4
+                  style={{
+                    fontWeight: 800,
+                    color: "#111827",
+                    marginBottom: "10px",
+                  }}
+                >
+                  {item.title}
+                </h4>
+
+                <p
+                  style={{
+                    color: "#6b7280",
+                    marginBottom: "20px",
+                  }}
+                >
+                  {item.description}
+                </p>
+
+                <span
+                  style={{
+                    color: item.color,
+                    fontWeight: 800,
+                  }}
+                >
+                  Learn More →
+                </span>
+              </Card.Body>
+            </Card>
+          </motion.div>
+        </Col>
+      ))}
+    </Row>
+  </Container>
+</section>
+);
 };
 
 export default GetInvolvedSection;

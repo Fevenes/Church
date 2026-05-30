@@ -1,154 +1,95 @@
-/* ===== BASE STYLES ===== */
-.home-about {
-    position: relative;
-    overflow: hidden;
-    transition: all 0.3s ease;
-  }
-  
-  .history-card,
-  .vision-card {
-    transition: all 0.3s ease;
-    height: 100%;
-  }
-  
-  .history-card:hover,
-  .vision-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
-  }
-  
-  .card-title {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-    font-weight: 600;
-  }
-  
-  .card-text {
-    color: #555;
-    margin-bottom: 1.5rem;
-    line-height: 1.6;
-  }
-  
-  .cta-link {
-    color: #2c3e50;
-    font-weight: 600;
-    text-decoration: none;
-    position: relative;
-    display: inline-block;
-    transition: all 0.3s ease;
-  }
-  
-  .cta-link:after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 2px;
-    bottom: -2px;
-    left: 0;
-    background-color: #e74c3c;
-    transform: scaleX(0);
-    transform-origin: right;
-    transition: transform 0.3s ease;
-  }
-  
-  .cta-link:hover {
-    color: #e74c3c;
-  }
-  
-  .cta-link:hover:after {
-    transform: scaleX(1);
-    transform-origin: left;
-  }
-  
-  /* ===== DARK MODE STYLES ===== */
-  .dark-theme-bible {
-    background: 
-      radial-gradient(ellipse at center, #1a1a1a 0%, #000000 100%),
-      url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%234a6fa5' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
-    color: #ffffff;
-    position: relative;
-  }
-  
-  .dark-theme-bible::before {
-    content: "✝";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 20vw;
-    opacity: 0.05;
-    pointer-events: none;
-    z-index: 0;
-  }
-  
-  /* Dark Mode Cards */
-  .dark-theme-bible .card {
-    background-color: rgba(30, 30, 30, 0.95) !important;
-    border: 1px solid #444 !important;
-    color: #f8f9fa !important;
-  }
-  
-  .dark-theme-bible .card-title {
-    color: #6d8cc9 !important;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-  }
-  
-  .dark-theme-bible .card-text {
-    color: #e0e0e0 !important;
-    line-height: 1.7;
-  }
-  
-  /* Dark Mode Links */
-  .dark-theme-bible .cta-link {
-    color: #8da8e0 !important;
-    font-weight: 500;
-  }
-  
-  .dark-theme-bible .cta-link:hover {
-    color: #a8c4ff !important;
-  }
-  
-  .dark-theme-bible .cta-link:after {
-    background-color: #8da8e0 !important;
-  }
-  
-  /* Dark Mode Hover Effects */
-  .dark-theme-bible .history-card:hover,
-  .dark-theme-bible .vision-card:hover {
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3) !important;
-  }
-  
-  /* Content Protection */
-  .dark-overlay {
-    position: relative;
-    z-index: 2;
-  }
-  
-  /* ===== RESPONSIVE ADJUSTMENTS ===== */
-  @media (max-width: 767.98px) {
-    .card-title {
-      font-size: 1.3rem;
-    }
-    
-    .card-text {
-      font-size: 0.95rem;
-    }
-  
-    /* Dark Mode Mobile Adjustments */
-    .dark-theme-bible .card-title {
-      font-size: 1.4rem !important;
-    }
-    
-    .dark-theme-bible .card-text {
-      font-size: 1rem !important;
-    }
-  }
-  
-  /* Smooth Transitions Between Modes */
-  .dark-theme-bible,
-  .dark-theme-bible .card,
-  .dark-theme-bible .card-body,
-  .dark-theme-bible .card-title,
-  .dark-theme-bible .card-text {
-    transition: all 0.5s ease;
-  }
+.home-about-section {
+  background: #f8f9fa;
+  padding: 75px 0;
+}
+
+.about-dark {
+  background: #0b1120;
+}
+
+.home-about-heading {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 42px;
+}
+
+.home-about-heading p {
+  color: #0d6efd;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.home-about-heading h2 {
+  color: #111827;
+  font-size: clamp(1.9rem, 4vw, 2.7rem);
+  font-weight: 900;
+  margin-bottom: 12px;
+}
+
+.home-about-heading span {
+  color: #6b7280;
+  font-size: 16px;
+}
+
+.about-dark .home-about-heading h2 {
+  color: #ffffff;
+}
+
+.home-about-card {
+  height: 100%;
+  border: none !important;
+  border-radius: 24px !important;
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.1);
+  padding: 14px;
+}
+
+.home-about-card.dark-card {
+  background: #111827;
+  color: #ffffff;
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.45);
+}
+
+.about-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #eef5ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  margin-bottom: 18px;
+}
+
+.home-about-card .card-title {
+  font-size: 26px;
+  font-weight: 900;
+  color: #111827;
+  margin-bottom: 14px;
+}
+
+.dark-card .card-title {
+  color: #ffffff;
+}
+
+.home-about-card .card-text {
+  color: #6b7280;
+  line-height: 1.8;
+}
+
+.dark-card .card-text {
+  color: #d1d5db;
+}
+
+.about-link {
+  color: #0d6efd;
+  text-decoration: none;
+  font-weight: 900;
+}
+
+.about-link:hover {
+  text-decoration: underline;
+}
